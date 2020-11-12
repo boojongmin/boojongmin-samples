@@ -1,0 +1,50 @@
+buildscript {
+	ext {
+		springBootVersion = '2.3.5.RELEASE'
+	}
+
+	repositories {
+		maven { url 'https://repo.spring.io/plugins-snapshot' }
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath 'io.spring.gradle:dependency-management-plugin:1.0.6.RELEASE'
+	}
+}
+
+subprojects {
+	apply plugin: "io.spring.dependency-management"
+	apply plugin: 'java'
+	apply plugin: 'org.springframework.boot'
+
+	group = 'com.example'
+	version = '0.0.1-SNAPSHOT'
+
+	sourceCompatibility = '11'
+
+	repositories {
+		mavenCentral()
+	}
+
+
+	repositories {
+		mavenCentral()
+	}
+
+	dependencies {
+		compileOnly 'org.projectlombok:lombok:1.18.16'
+		annotationProcessor 'org.projectlombok:lombok:1.18.16'
+
+		testImplementation('org.springframework.boot:spring-boot-starter-test') {
+			exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+		}
+	}
+
+	test {
+		useJUnitPlatform()
+	}
+
+
+}
+
+
